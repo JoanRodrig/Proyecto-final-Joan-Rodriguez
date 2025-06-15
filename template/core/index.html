@@ -1,0 +1,141 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>BodyScanner AI - Inicio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #009999;
+      color: white;
+    }
+
+    .container-main {
+      text-align: center;
+      padding: 60px 20px 30px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: normal;
+      color: #e0fafa;
+      margin-bottom: 30px;
+    }
+
+    .btn-eval {
+      background-color: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+    }
+
+    .btn-eval:hover {
+      background-color: white;
+      color: #009999;
+    }
+
+    .tarjetas-principales {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 50px;
+      flex-wrap: wrap;
+      padding: 0 20px 60px;
+    }
+
+    .tarjeta-link {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .tarjeta-funcion {
+      background-color: #007a7a;
+      border: 2px solid #005959;
+      padding: 20px;
+      width: 250px;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .tarjeta-funcion:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .tarjeta-funcion .icono {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .tarjeta-funcion h4 {
+      margin-bottom: 8px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .tarjeta-funcion p {
+      font-size: 15px;
+      color: #eafefe;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-main">
+    <h1>Sistema Automatizado<br>de Evaluación Física</h1>
+    <h2>Análisis corporal inteligente usando IA</h2>
+
+    <a href="{% url 'evaluacion_ia' %}">
+      <button class="btn-eval">Iniciar Evaluación</button>
+    </a>
+
+    <div class="tarjetas-principales">
+      <a href="{% url 'escanear' %}" class="tarjeta-link">
+        <div class="tarjeta-funcion">
+          <div class="icono">📷</div>
+          <h4>Escanea tu imagen corporal</h4>
+          <p>Evalúa tu condición física actual</p>
+        </div>
+      </a>
+
+      <a href="{% url 'seguimiento' %}" class="tarjeta-link">
+        <div class="tarjeta-funcion">
+          <div class="icono">📈</div>
+          <h4>Seguimiento de progreso</h4>
+          <p>Visualiza mejoras a lo largo del tiempo</p>
+        </div>
+      </a>
+
+      <a href="{% url 'comunidad' %}" class="tarjeta-link">
+        <div class="tarjeta-funcion">
+          <div class="icono">🌐</div>
+          <h4>Comunidad</h4>
+          <p>Sigue tus avances y comparte tu experiencia</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
+
+{% endblock %}

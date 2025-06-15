@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<style>
+  body {
+    background-color: #037c7c;
+  }
+  .comunidad-container {
+    padding: 40px 20px;
+    text-align: center;
+    color: white;
+  }
+
+  .comunidad-container h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px black;
+  }
+
+  .comunidad-container p {
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+
+  .tarjetas-publicaciones {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .tarjeta {
+    background-color: #033f66;
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+    padding: 16px;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 14px;
+  }
+
+  .tarjeta .username {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .tarjeta .icono {
+    font-size: 18px;
+  }
+
+  .tarjeta .comentario {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+  }
+</style>
+
+<div class="comunidad-container">
+  <h2>Comunidad</h2>
+  <p>Conéctate con otros, comparte tus experiencias y<br>mantente motivado</p>
+
+  <div class="tarjetas-publicaciones">
+    <div class="tarjeta">
+      <div class="username"><span class="icono">👤</span>Username</div>
+      <p>Texto de publicación......</p>
+      <div class="comentario"><span class="icono">📝</span>Comentar......</div>
+    </div>
+
+    <div class="tarjeta">
+      <div class="username"><span class="icono">👤</span>Username</div>
+      <p>Texto de publicación......</p>
+      <div class="comentario"><span class="icono">📝</span>Comentar......</div>
+    </div>
+
+    <div class="tarjeta">
+      <div class="username"><span class="icono">👤</span>Username</div>
+      <p>Texto de publicación......</p>
+      <div class="comentario"><span class="icono">📝</span>Comentar......</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

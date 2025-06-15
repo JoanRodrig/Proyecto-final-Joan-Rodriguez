@@ -1,0 +1,152 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<style>
+  body {
+    background-color: #037c7c;
+  }
+  .evaluacion-ia {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 40px 20px;
+    color: white;
+    flex-wrap: wrap;
+  }
+  .ia-camara, .ia-formulario, .ia-resultados {
+    flex: 1;
+    margin: 20px;
+    min-width: 250px;
+  }
+  .ia-camara {
+    background-color: #2fa59d;
+    border-radius: 6px;
+    padding: 30px;
+    text-align: center;
+    height: 270px;
+  }
+  .ia-formulario input {
+    display: block;
+    margin-bottom: 12px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+  }
+  .ia-formulario button {
+    padding: 10px;
+    background-color: #165d59;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+  }
+  .ia-resultados {
+    margin-top: 20px;
+  }
+  .btn-bloque {
+    background-color: #222;
+    color: white;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: none;
+    margin-top: 10px;
+    display: block;
+    cursor: pointer;
+  }
+</style>
+
+<div class="container text-center">
+  <h2>Usa la IA para estimar tu grasa corporal</h2>
+  <p>Activa la cámara o sube una imagen para escanear tu cuerpo</p>
+</div>
+
+<div class="evaluacion-ia">
+  <!-- Cámara -->
+  <div class="ia-camara">
+    <video id="videoFeed" autoplay playsinline></video>
+    <button id="activateCamera">Activar cámara</button>
+    <button id="captureImage">Capturar imagen</button>
+  </div>
+
+  <!-- Formulario -->
+  <div class="ia-formulario">
+    <label>Altura (cm)</label>
+    <input type="number" id="heightInput" required>
+
+    <label>Peso (Kg)</label>
+    <input type="number" id="weightInput" required>
+
+    <label>Subir imagen (opcional)</label>
+    <input type="file" id="imageInput" accept="image/*">
+
+    <button id="calculateButton">Calcular</button>
+  </div>
+
+  <!-- Resultados -->
+  <div class="ia-resultados" id="resultados" style="display:none;">
+    <h3 id="resultadoGrasa"></h3>
+    <p id="resultadoClasificacion"></p>
+    <button class="btn-bloque">Generar rutina de ejercicios</button>
+    <button class="btn-bloque">Generar plan alimenticio</button>
+  </div>
+</div>
+
+<script>
+  const video = document.getElementById('videoFeed');
+  const activateCameraBtn = document.getElementById('activateCamera');
+  const captureBtn = document.getElementById('captureImage');
+  let base64Image = null;
+
+  activateCameraBtn.onclick = () => {
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => video.srcObject = stream)
+      .catch(err => alert("No se pudo acceder a la cámara: " + err));
+  };
+
+  captureBtn.onclick = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video, 0, 0);
+    base64Image = canvas.toDataURL('image/jpeg');
+    alert("Imagen capturada con éxito.");
+  };
+
+  document.getElementById('calculateButton').onclick = async () => {
+    const altura = document.getElementById('heightInput').value;
+    const peso = document.getElementById('weightInput').value;
+    const imageInput = document.getElementById('imageInput').files[0];
+
+    const formData = new FormData();
+    formData.append('altura', altura);
+    formData.append('peso', peso);
+
+    if (imageInput) {
+      formData.append('imagen', imageInput);
+    } else if (base64Image) {
+      formData.append('imagen_base64', base64Image);
+    } else {
+      alert("Debes capturar o subir una imagen.");
+      return;
+    }
+
+    const response = await fetch("", {
+      method: "POST",
+      body: formData,
+      headers: { "X-CSRFToken": "{{ csrf_token }}" }
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      document.getElementById('resultadoGrasa').textContent = `Tu grasa corporal estimada es: ${data.porcentaje_grasa}%`;
+      document.getElementById('resultadoClasificacion').textContent = `Clasificación: ${data.clasificacion}`;
+      document.getElementById('resultados').style.display = 'block';
+    } else {
+      alert(data.error || "Ocurrió un error.");
+    }
+  };
+</script>
+{% endblock %}

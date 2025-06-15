@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/signin.css' %}">
+
+<div class="login-bg">
+  <div class="login-card">
+    
+    <div class="login-left">
+      <h2 class="slogan">Mide tu grasa corporal al instante y mejora tu salud</h2>
+
+      <form action="/signin/" method="POST" class="login-form">
+        <h1>Iniciar Sesión</h1>
+        {% csrf_token %}
+        
+        <div class="form-field">
+          <label for="id_username">Username:</label>
+          {{ form.username }}
+        </div>
+
+        <div class="form-field">
+          <label for="id_password">Password:</label>
+          {{ form.password }}
+        </div>
+
+        {% if error %}
+          <p class="error-msg">{{ error }}</p>
+        {% endif %}
+
+        <button type="submit" class="btn-iniciar">Iniciar Sesión</button>
+
+        <div class="login-links">
+          <a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
+          <a href="/signup/" class="btn-secundario">Crear cuenta</a>
+        </div>
+      </form>
+    </div>
+
+    <div class="login-right">
+      <img src="{% static 'img/silueta-body.png' %}" alt="Silueta">
+      <p>BodyScanner <span>AI</span></p>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

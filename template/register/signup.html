@@ -1,0 +1,116 @@
+{# templates/register/signup.html #}
+{% extends 'layout.html' %}
+{% load static %}
+
+{# Si tu layout.html define bloques head y content #}
+{% block head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="gradient-bg">
+    <div class="signup-card">
+
+        <!-- IZQUIERDA: Formulario de registro -->
+        <div class="signup-form-container">
+            <h2>Crea tu cuenta</h2>
+
+            <form action="{% url 'signup' %}" method="POST">
+                {% csrf_token %}
+
+                <!-- Nombres -->
+                <div class="form-field">
+                    <label for="id_nombres">Nombres</label>
+                    {{ form.first_name }}
+                    {% for error in form.first_name.errors %}
+                    <p class="text-red-400 text-sm">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <!-- Apellidos -->
+                <div class="form-field">
+                    <label for="id_apellidos">Apellidos</label>
+                    {{ form.last_name }}
+                    {% for error in form.last_name.errors %}
+                    <p class="text-red-400 text-sm">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <!-- Nombre de usuario -->
+                <div class="form-field">
+                    <label for="id_username">Nombre de usuario</label>
+                    {{ form.username }}
+                    {% for error in form.username.errors %}
+                    <p class="text-red-400 text-sm">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <!-- Fecha de nacimiento -->
+                <div class="form-field">
+                    <label for="id_fecha_nacimiento">Fecha de nacimiento</label>
+                    {{ form.fecha_nacimiento }}
+                    {% for error in form.fecha_nacimiento.errors %}
+                    <p class="text-red-400 text-sm">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <!-- Sexo -->
+                <div class="form-field">
+                    <label for="id_sexo">Sexo</label>
+                    {{ form.sexo }}
+                    {% for error in form.sexo.errors %}
+                    <p class="text-red-400 text-sm">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <!-- Correo electrónico -->
+                <div class="form-field">
+                    <label for="id_email">Correo electrónico</label>
+                    {{ form.email }}
+                    {% for error in form.email.errors %}
+                    <p class="text-red-400 text-sm">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <!-- Contraseña -->
+                <div class="form-field">
+                    <label for="id_password1">Contraseña</label>
+                    {{ form.password1 }}
+                    {% for error in form.password1.errors %}
+                    <p class="text-red-400 text-sm">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <!-- Confirmar contraseña -->
+                <div class="form-field">
+                    <label for="id_password2">Confirmar contraseña</label>
+                    {{ form.password2 }}
+                    {% for error in form.password2.errors %}
+                    <p class="text-red-400 text-sm">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                {# Errores no campo (e.g. duplicado de usuario) #}
+                {% if form.non_field_errors %}
+                <div class="text-red-400 text-sm mb-4">
+                    {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <button type="submit" class="btn-primary">
+                    REGISTRARSE
+                </button>
+            </form>
+        </div>
+
+        <!-- DERECHA: Silueta y logo -->
+        <div class="right-column">
+            <img src="{% static 'img/silueta-body.png' %}" alt="Silueta">
+        </div>
+
+    </div>
+</div>
+{% endblock %}
