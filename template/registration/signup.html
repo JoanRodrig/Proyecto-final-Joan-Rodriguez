@@ -2,13 +2,10 @@
 {% extends 'layout.html' %}
 {% load static %}
 
-{# Si tu layout.html define bloques head y content #}
-{% block head %}
-{{ block.super }}
-<link rel="stylesheet" href="{% static 'css/signup.css' %}">
-{% endblock %}
-
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+<link rel="stylesheet" href="{% static 'css/most_ocul.css' %}">
+
 <div class="gradient-bg">
     <div class="signup-card">
 
@@ -24,7 +21,7 @@
                     <label for="id_nombres">Nombres</label>
                     {{ form.first_name }}
                     {% for error in form.first_name.errors %}
-                    <p class="text-red-400 text-sm">{{ error }}</p>
+                    <p class="text-red-400">{{ error }}</p>
                     {% endfor %}
                 </div>
 
@@ -33,7 +30,7 @@
                     <label for="id_apellidos">Apellidos</label>
                     {{ form.last_name }}
                     {% for error in form.last_name.errors %}
-                    <p class="text-red-400 text-sm">{{ error }}</p>
+                    <p class="text-red-400">{{ error }}</p>
                     {% endfor %}
                 </div>
 
@@ -42,7 +39,7 @@
                     <label for="id_username">Nombre de usuario</label>
                     {{ form.username }}
                     {% for error in form.username.errors %}
-                    <p class="text-red-400 text-sm">{{ error }}</p>
+                    <p class="text-red-400">{{ error }}</p>
                     {% endfor %}
                 </div>
 
@@ -51,7 +48,7 @@
                     <label for="id_fecha_nacimiento">Fecha de nacimiento</label>
                     {{ form.fecha_nacimiento }}
                     {% for error in form.fecha_nacimiento.errors %}
-                    <p class="text-red-400 text-sm">{{ error }}</p>
+                    <p class="text-red-400">{{ error }}</p>
                     {% endfor %}
                 </div>
 
@@ -60,7 +57,7 @@
                     <label for="id_sexo">Sexo</label>
                     {{ form.sexo }}
                     {% for error in form.sexo.errors %}
-                    <p class="text-red-400 text-sm">{{ error }}</p>
+                    <p class="text-red-400">{{ error }}</p>
                     {% endfor %}
                 </div>
 
@@ -69,31 +66,41 @@
                     <label for="id_email">Correo electrónico</label>
                     {{ form.email }}
                     {% for error in form.email.errors %}
-                    <p class="text-red-400 text-sm">{{ error }}</p>
+                    <p class="text-red-400">{{ error }}</p>
                     {% endfor %}
                 </div>
 
                 <!-- Contraseña -->
                 <div class="form-field">
                     <label for="id_password1">Contraseña</label>
-                    {{ form.password1 }}
+                    <div class="password-field">
+                        {{ form.password1 }}
+                        <button type="button" class="password-toggle" data-target="id_password1">
+                            <span class="show-icon"></span>
+                        </button>
+                    </div>
                     {% for error in form.password1.errors %}
-                    <p class="text-red-400 text-sm">{{ error }}</p>
+                    <p class="text-red-400">{{ error }}</p>
                     {% endfor %}
                 </div>
 
                 <!-- Confirmar contraseña -->
                 <div class="form-field">
                     <label for="id_password2">Confirmar contraseña</label>
-                    {{ form.password2 }}
+                    <div class="password-field">
+                        {{ form.password2 }}
+                        <button type="button" class="password-toggle" data-target="id_password2">
+                            <span class="show-icon"></span>
+                        </button>
+                    </div>
                     {% for error in form.password2.errors %}
-                    <p class="text-red-400 text-sm">{{ error }}</p>
+                    <p class="text-red-400">{{ error }}</p>
                     {% endfor %}
                 </div>
 
                 {# Errores no campo (e.g. duplicado de usuario) #}
                 {% if form.non_field_errors %}
-                <div class="text-red-400 text-sm mb-4">
+                <div class="text-red-400 mb-4">
                     {% for error in form.non_field_errors %}
                     <p>{{ error }}</p>
                     {% endfor %}
@@ -109,8 +116,11 @@
         <!-- DERECHA: Silueta y logo -->
         <div class="right-column">
             <img src="{% static 'img/silueta-body.png' %}" alt="Silueta">
+            <p>BodyScanner <span>AI</span></p>
         </div>
 
     </div>
 </div>
+
+<script src="{% static 'js/most_ocul.js' %}"></script>
 {% endblock %}

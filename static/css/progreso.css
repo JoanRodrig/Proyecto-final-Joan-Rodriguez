@@ -1,0 +1,333 @@
+/* static/css/progreso.css */
+.progress-container {
+    background: linear-gradient(135deg, #1e7e7e 0%, #2a9d8f 100%);
+    min-height: 100vh;
+    width: 100%;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.progress-header {
+    padding: 4rem 0 2rem 0;
+    text-align: center;
+}
+
+.progress-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.progress-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 3rem;
+}
+
+.progress-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.progress-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.progress-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.progress-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.card-description {
+    opacity: 0.9;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.chart-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.progress-chart {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    height: 400px;
+}
+
+.chart-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.timeline {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    border-left: 3px solid #4ade80;
+    padding-left: 1.5rem;
+    margin-left: 1rem;
+    position: relative;
+}
+
+.timeline-item:before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: #4ade80;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+.timeline-date {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #4ade80;
+}
+
+.timeline-content {
+    font-weight: 500;
+}
+
+.timeline-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-metric {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.timeline-recomendacion {
+    background: rgba(74, 222, 128, 0.1);
+    padding: 0.8rem;
+    border-radius: 8px;
+    border-left: 3px solid #4ade80;
+    margin-top: 0.8rem;
+}
+
+.no-data {
+    text-align: center;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    margin: 2rem 0;
+}
+
+.no-data-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.no-data h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.no-data p {
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.btn-primary:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.positive {
+    color: #4ade80;
+}
+
+.negative {
+    color: #f87171;
+}
+
+.filtro-rango {
+    margin: 1rem 0;
+    text-align: right;
+}
+
+.filtro-form {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+}
+
+.filtro-form label {
+    margin-right: 0.5rem;
+    opacity: 0.8;
+}
+
+.filtro-form select {
+    background: rgba(0, 0, 0, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.filtro-form select:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .progress-title {
+        font-size: 2.5rem;
+    }
+    
+    .progress-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .progress-content {
+        padding: 0 1rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+    
+    .chart-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 992px) {
+    .chart-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.progress-card, .progress-chart, .timeline {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.progress-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.progress-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.no-chart-data {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-top: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+}

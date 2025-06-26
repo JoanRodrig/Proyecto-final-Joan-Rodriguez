@@ -1,0 +1,126 @@
+/* === ESTILOS PARA TOGGLE DE CONTRASEÑAS === */
+
+/* Contenedor principal del campo de contraseña */
+.password-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* Input de contraseña con espacio para el botón */
+.password-field input {
+    padding-right: 45px !important; /* Espacio reservado para el botón */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Botón toggle */
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    z-index: 10;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+}
+
+/* Estados del botón */
+.password-toggle:hover {
+    color: #333;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.password-toggle:focus {
+    outline: none;
+    color: #0066cc;
+    background-color: rgba(0, 102, 204, 0.1);
+}
+
+.password-toggle:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+/* Iconos usando emojis */
+.password-toggle .show-icon::before {
+    content: "👁️";
+    font-size: 14px;
+}
+
+.password-toggle .hide-icon::before {
+    content: "🙈";
+    font-size: 14px;
+}
+
+/* Alternativa con símbolos Unicode más simples */
+.password-toggle.simple .show-icon::before {
+    content: "👁";
+    font-size: 16px;
+}
+
+.password-toggle.simple .hide-icon::before {
+    content: "✕";
+    font-size: 16px;
+    color: #999;
+}
+
+/* Alternativa con texto */
+.password-toggle.text .show-icon::before {
+    content: "Ver";
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.password-toggle.text .hide-icon::before {
+    content: "Ocultar";
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .password-toggle {
+        right: 10px;
+        width: 28px;
+        height: 28px;
+        font-size: 18px;
+    }
+    
+    .password-field input {
+        padding-right: 50px !important;
+    }
+}
+
+/* Para campos con bordes redondeados */
+.password-field.rounded input {
+    border-radius: 8px;
+}
+
+/* Para temas oscuros */
+.dark-theme .password-toggle {
+    color: #ccc;
+}
+
+.dark-theme .password-toggle:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .password-toggle:focus {
+    color: #66b3ff;
+    background-color: rgba(102, 179, 255, 0.2);
+}

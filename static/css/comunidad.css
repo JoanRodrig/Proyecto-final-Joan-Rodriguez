@@ -1,0 +1,410 @@
+/* Estilos específicos para la página de comunidad - Con fondo turquesa */
+
+/* Asegurar que el body tenga el fondo turquesa */
+body {
+    background: #037c7c !important;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+}
+
+.comunidad-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: transparent;
+    color: white;
+}
+
+.comunidad-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.comunidad-header h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 10px;
+}
+
+/* Formulario para crear posts */
+.post-form-container {
+    background: rgba(13, 27, 42, 0.95);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.post-form-container textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 15px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    resize: none;
+    margin-bottom: 15px;
+}
+
+.post-form-container textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.form-actions button {
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.form-actions .btn-primary {
+    background: linear-gradient(135deg, #037c7c, #63e0a1);
+    color: white;
+}
+
+.form-actions .btn-primary:hover {
+    opacity: 0.9;
+}
+
+.form-actions .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.form-actions .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Posts grid */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.post-card {
+    background: rgba(13, 27, 42, 0.95);
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.post-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #037c7c, #63e0a1);
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #037c7c, #63e0a1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+}
+
+.user-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+}
+
+.post-time {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 2px;
+}
+
+.post-content {
+    margin: 20px 0;
+}
+
+.post-content p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin: 0;
+    font-size: 15px;
+}
+
+.post-stats {
+    display: flex;
+    gap: 15px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 10px;
+}
+
+.post-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.action-btn.liked {
+    color: #e74c3c;
+}
+
+.action-btn i {
+    font-size: 16px;
+}
+
+/* Sección de comentarios */
+.comments-section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comments-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.comment {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.comment:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.comment-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #037c7c, #63e0a1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: white;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.comment-content {
+    flex-grow: 1;
+}
+
+.comment-user {
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.comment-text {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+}
+
+.comment-time {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 5px;
+}
+
+.add-comment-form {
+    margin-top: 15px;
+}
+
+.comment-input-container {
+    position: relative;
+}
+
+.comment-input-container textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 10px 45px 10px 15px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    resize: none;
+    min-height: 50px;
+    max-height: 100px;
+}
+
+.comment-input-container textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-comment-submit {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    background: transparent;
+    border: none;
+    color: #63e0a1;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Botón para crear nuevo post */
+.create-post-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #037c7c, #63e0a1);
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    z-index: 1000;
+}
+
+.create-post-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Estados vacíos */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: rgba(255, 255, 255, 0.8);
+    grid-column: 1 / -1;
+}
+
+.empty-state h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.empty-state p {
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .comunidad-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .posts-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 10px;
+    }
+    
+    .post-card {
+        padding: 20px;
+    }
+    
+    .create-post-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .comunidad-header h1 {
+        font-size: 2rem;
+    }
+    
+    .posts-grid {
+        padding: 0 5px;
+    }
+    
+    .post-actions {
+        gap: 10px;
+    }
+    
+    .action-btn span {
+        display: none;
+    }
+    
+    .action-btn i {
+        font-size: 18px;
+    }
+}

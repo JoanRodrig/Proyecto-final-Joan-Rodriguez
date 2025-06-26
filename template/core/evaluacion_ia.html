@@ -1,152 +1,144 @@
 {% extends 'layout.html' %}
 {% load static %}
+
 {% block content %}
-<style>
-  body {
-    background-color: #037c7c;
-  }
-  .evaluacion-ia {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    padding: 40px 20px;
-    color: white;
-    flex-wrap: wrap;
-  }
-  .ia-camara, .ia-formulario, .ia-resultados {
-    flex: 1;
-    margin: 20px;
-    min-width: 250px;
-  }
-  .ia-camara {
-    background-color: #2fa59d;
-    border-radius: 6px;
-    padding: 30px;
-    text-align: center;
-    height: 270px;
-  }
-  .ia-formulario input {
-    display: block;
-    margin-bottom: 12px;
-    width: 100%;
-    padding: 8px;
-    border-radius: 6px;
-    border: none;
-    font-size: 14px;
-  }
-  .ia-formulario button {
-    padding: 10px;
-    background-color: #165d59;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    width: 100%;
-  }
-  .ia-resultados {
-    margin-top: 20px;
-  }
-  .btn-bloque {
-    background-color: #222;
-    color: white;
-    padding: 10px 12px;
-    border-radius: 6px;
-    border: none;
-    margin-top: 10px;
-    display: block;
-    cursor: pointer;
-  }
-</style>
+<link rel="stylesheet" href="{% static 'css/evaluacion_ia.css' %}">
 
-<div class="container text-center">
-  <h2>Usa la IA para estimar tu grasa corporal</h2>
-  <p>Activa la cámara o sube una imagen para escanear tu cuerpo</p>
+<div class="evaluacion-container">
+    <h1 class="evaluacion-title">📷 Evaluación Física con IA</h1>
+    <p class="evaluacion-subtitle">Obtén una evaluación precisa de tu composición corporal</p>
+    
+    <div class="evaluation-flow">
+        <!-- Paso 1: Captura de Imagen -->
+        <div id="step1" class="step active">
+            <div class="image-preview-container">
+                <div id="imagePreview" class="image-preview">
+                    <div class="preview-placeholder">
+                        <i class="fas fa-camera"></i>
+                        <p>Captura o sube una imagen</p>
+                    </div>
+                    <video id="videoFeed" autoplay playsinline></video>
+                    <canvas id="captureCanvas" style="display: none;"></canvas>
+                    <img id="previewImage" style="display: none;" alt="Imagen capturada">
+                </div>
+                <button id="btnCapture" class="btn-capture" style="display: none;">
+                    <i class="fas fa-camera"></i> Capturar Foto
+                </button>
+            </div>
+            
+            <div class="upload-options">
+                <button id="btnCamera" class="btn-option">
+                    <i class="fas fa-video"></i> Usar Cámara
+                </button>
+                <button id="btnUpload" class="btn-option">
+                    <i class="fas fa-upload"></i> Subir Imagen
+                </button>
+            </div>
+        </div>
+
+        <!-- Paso 2: Datos Corporales -->
+        <div id="step2" class="step">
+            <div class="form-container">
+                <h3>Datos Corporales</h3>
+                <div class="form-group">
+                    <label for="heightInput">Altura (cm)</label>
+                    <input type="number" id="heightInput" class="form-input" placeholder="Ej: 170" min="100" max="250" required>
+                </div>
+                <div class="form-group">
+                    <label for="weightInput">Peso (kg)</label>
+                    <input type="number" id="weightInput" class="form-input" placeholder="Ej: 65" min="30" max="300" step="0.1" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paso 3: Resultados -->
+        <div id="step3" class="step">
+            <div class="results-container">
+                <h3>Resultados de la Evaluación</h3>
+                
+                <div class="result-section">
+                    <h4 class="result-subtitle">Datos Personales</h4>
+                    <div class="result-item">
+                        <span class="result-label">Género:</span>
+                        <span id="resultGenero" class="result-value">--</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Altura:</span>
+                        <span id="resultAltura" class="result-value">--</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Peso:</span>
+                        <span id="resultPeso" class="result-value">--</span>
+                    </div>
+                </div>
+                
+                <div class="result-section">
+                    <h4 class="result-subtitle">Medidas Detectadas</h4>
+                    <div class="result-item">
+                        <span class="result-label">Cuello:</span>
+                        <span id="resultCuello" class="result-value">--</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Abdomen:</span>
+                        <span id="resultAbdomen" class="result-value">--</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Cadera:</span>
+                        <span id="resultCadera" class="result-value">--</span>
+                    </div>
+                </div>
+                
+                <div class="result-section">
+                    <h4 class="result-subtitle">Resultados</h4>
+                    <div class="result-item">
+                        <span class="result-label">Porcentaje de Grasa Corporal:</span>
+                        <span id="resultGrasa" class="result-value">--</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Clasificación:</span>
+                        <span id="resultClasificacion" class="result-value">--</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Recomendación:</span>
+                        <span id="resultRecomendacion" class="result-value">--</span>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="btnWorkout" class="btn-action">
+                        <i class="fas fa-dumbbell"></i> Ver Rutina
+                    </button>
+                    <button id="btnDiet" class="btn-action">
+                        <i class="fas fa-utensils"></i> Plan Alimenticio
+                    </button>
+                    <button id="btnProgress" class="btn-action">
+                        <i class="fas fa-chart-line"></i> Ver Progreso
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <div class="step-navigation">
+        <button id="btnPrev" class="btn-nav">
+            <i class="fas fa-arrow-left"></i> Anterior
+        </button>
+        
+        <button id="btnNext" class="btn-nav" disabled>
+            Siguiente <i class="fas fa-arrow-right"></i>
+        </button>
+
+        <button id="btnCalculate" class="btn-calculate" style="display: none;">
+            <i class="fas fa-calculator"></i> Calcular
+        </button>
+    </div>
 </div>
 
-<div class="evaluacion-ia">
-  <!-- Cámara -->
-  <div class="ia-camara">
-    <video id="videoFeed" autoplay playsinline></video>
-    <button id="activateCamera">Activar cámara</button>
-    <button id="captureImage">Capturar imagen</button>
-  </div>
+<!-- Input oculto para subir archivos -->
+<input type="file" id="fileInput" accept="image/*" style="display: none;">
 
-  <!-- Formulario -->
-  <div class="ia-formulario">
-    <label>Altura (cm)</label>
-    <input type="number" id="heightInput" required>
-
-    <label>Peso (Kg)</label>
-    <input type="number" id="weightInput" required>
-
-    <label>Subir imagen (opcional)</label>
-    <input type="file" id="imageInput" accept="image/*">
-
-    <button id="calculateButton">Calcular</button>
-  </div>
-
-  <!-- Resultados -->
-  <div class="ia-resultados" id="resultados" style="display:none;">
-    <h3 id="resultadoGrasa"></h3>
-    <p id="resultadoClasificacion"></p>
-    <button class="btn-bloque">Generar rutina de ejercicios</button>
-    <button class="btn-bloque">Generar plan alimenticio</button>
-  </div>
-</div>
-
-<script>
-  const video = document.getElementById('videoFeed');
-  const activateCameraBtn = document.getElementById('activateCamera');
-  const captureBtn = document.getElementById('captureImage');
-  let base64Image = null;
-
-  activateCameraBtn.onclick = () => {
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then(stream => video.srcObject = stream)
-      .catch(err => alert("No se pudo acceder a la cámara: " + err));
-  };
-
-  captureBtn.onclick = () => {
-    const canvas = document.createElement('canvas');
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    canvas.getContext('2d').drawImage(video, 0, 0);
-    base64Image = canvas.toDataURL('image/jpeg');
-    alert("Imagen capturada con éxito.");
-  };
-
-  document.getElementById('calculateButton').onclick = async () => {
-    const altura = document.getElementById('heightInput').value;
-    const peso = document.getElementById('weightInput').value;
-    const imageInput = document.getElementById('imageInput').files[0];
-
-    const formData = new FormData();
-    formData.append('altura', altura);
-    formData.append('peso', peso);
-
-    if (imageInput) {
-      formData.append('imagen', imageInput);
-    } else if (base64Image) {
-      formData.append('imagen_base64', base64Image);
-    } else {
-      alert("Debes capturar o subir una imagen.");
-      return;
-    }
-
-    const response = await fetch("", {
-      method: "POST",
-      body: formData,
-      headers: { "X-CSRFToken": "{{ csrf_token }}" }
-    });
-
-    const data = await response.json();
-    if (response.ok) {
-      document.getElementById('resultadoGrasa').textContent = `Tu grasa corporal estimada es: ${data.porcentaje_grasa}%`;
-      document.getElementById('resultadoClasificacion').textContent = `Clasificación: ${data.clasificacion}`;
-      document.getElementById('resultados').style.display = 'block';
-    } else {
-      alert(data.error || "Ocurrió un error.");
-    }
-  };
-</script>
+<!-- Font Awesome para los iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<script src="{% static 'js/evaluacion_ia.js' %}"></script>
 {% endblock %}

@@ -1,0 +1,235 @@
+/* Estilos para la página principal (index) - Con fondo turquesa */
+
+/* Asegurar que el body tenga el fondo turquesa */
+body {
+    background: #037c7c !important;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+}
+
+.evaluacion-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    gap: 60px;
+    background: transparent; /* Transparente para mostrar el fondo turquesa */
+}
+
+.evaluacion-texto {
+    flex: 1;
+    max-width: 600px;
+}
+
+.evaluacion-texto h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.evaluacion-texto h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 40px;
+    line-height: 1.4;
+}
+
+.btn-evaluar {
+    background: linear-gradient(135deg, #63e0a1, #037c7c);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-evaluar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #037c7c, #63e0a1);
+}
+
+.evaluacion-imagen {
+    flex: 1;
+    text-align: center;
+    max-width: 400px;
+}
+
+.evaluacion-imagen img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.evaluacion-imagen img:hover {
+    transform: scale(1.05);
+}
+
+/* Tarjetas de características */
+.cards-evaluacion {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 60px auto 0;
+    padding: 0 20px;
+}
+
+.card-accion {
+    background: rgba(13, 27, 42, 0.95);
+    border-radius: 15px;
+    padding: 40px 30px;
+    text-align: center;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-accion::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #037c7c, #63e0a1);
+}
+
+.card-accion:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.card-accion strong {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 15px 0 10px;
+    color: #ffffff;
+}
+
+.card-accion p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Iconos de emoji más grandes */
+.card-accion .emoji {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    display: block;
+    line-height: 1;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+
+/* Alternativa para iconos de texto */
+.card-accion > *:first-child {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 15px;
+    filter: grayscale(0);
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+    .evaluacion-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        padding: 40px 20px;
+    }
+    
+    .evaluacion-texto h1 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .evaluacion-texto h1 {
+        font-size: 2.5rem;
+    }
+    
+    .evaluacion-texto h2 {
+        font-size: 1.3rem;
+    }
+    
+    .btn-evaluar {
+        padding: 15px 30px;
+        font-size: 16px;
+    }
+    
+    .cards-evaluacion {
+        gap: 20px;
+        margin-top: 40px;
+    }
+    
+    .card-accion {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .evaluacion-container {
+        padding: 20px 10px;
+    }
+    
+    .evaluacion-texto h1 {
+        font-size: 2rem;
+    }
+    
+    .cards-evaluacion {
+        grid-template-columns: 1fr;
+        padding: 0 10px;
+    }
+}
+
+
+
+/* Opción 3: Crear un overlay para unificar el color */
+.evaluacion-imagen {
+    flex: 1;
+    text-align: center;
+    max-width: 400px;
+    position: relative;
+}
+
+.evaluacion-imagen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(3, 124, 124, 0.1);
+    border-radius: 15px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.evaluacion-imagen img {
+    position: relative;
+    z-index: 2;
+}
+

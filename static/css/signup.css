@@ -1,398 +1,280 @@
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-  height: 100vh;
+/* === ESTILOS GENERALES === */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
 }
 
+/* === FONDO CON DEGRADADO - PANTALLA COMPLETA === */
 .gradient-bg {
-  background: linear-gradient(135deg, #006466, #065a60, #144552);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg, #006466, #065a60, #144552);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+    padding-bottom: 60px;
+    box-sizing: border-box;
+    position: relative;
 }
 
+/* === TARJETA PRINCIPAL === */
 .signup-card {
-  display: flex;
-  background-color: #0d1b2a;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  max-width: 900px;
-  width: 90%;
+    display: flex;
+    width: 600px;
+    background-color: #0d1b2a;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 1;
+    margin: 20px;
 }
 
+/* === CONTENEDOR DEL FORMULARIO === */
 .signup-form-container {
-  padding: 40px;
-  flex: 1;
-  color: #fff;
+    width: 60%;
+    padding: 24px;
+    color: white;
+    /* CAMBIADO: texto blanco para contraste */
+    background-color: #0d1b2a;
+    /* AÑADIDO: fondo azul oscuro */
+    position: relative;
 }
 
 .signup-form-container h2 {
-  margin-bottom: 20px;
-  font-size: 28px;
-  font-weight: bold;
-  text-align: center;
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+    /* AÑADIDO: título en blanco */
 }
 
+/* === CAMPOS DEL FORMULARIO === */
 .form-field {
-  margin-bottom: 18px;
-  display: flex;
-  flex-direction: column;
+    margin-bottom: 12px;
 }
 
 .form-field label {
-  margin-bottom: 6px;
-  font-size: 14px;
-}
-
-.form-field input, 
-.form-field select {
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  background-color: #fff;
-  color: #000;
-  font-size: 14px;
-}
-
-.btn-primary {
-  width: 100%;
-  padding: 12px;
-  background-color: #1B8C7D;
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.btn-primary:hover {
-  background-color: #146c60;
-}
-
-/* Parte derecha */
-.right-column {
-  background: url('../img/fondo-gradient.png') center center/cover no-repeat;
-  flex: 1;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.right-column img {
-  width: 70%;
-  max-width: 300px;
-  filter: brightness(1.2);
-}
-
-.right-column p {
-  margin-top: 20px;
-  font-size: 22px;
-  font-weight: bold;
-  color: #000;
-}
-
-.right-column p span {
-  color: #6f00ff;
-}
-/* Fondo general con degradado */
-.gradient-bg {
-  height: 100vh;
-  background: linear-gradient(135deg, #006466, #065a60, #144552);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-}
-
-/* Tarjeta principal */
-.signup-card {
-  display: flex;
-  width: 900px;
-  height: auto;
-  background-color: #0d1b2a;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-}
-
-/* Columna izquierda - Formulario */
-.signup-form-container {
-  width: 60%;
-  padding: 40px;
-  color: white;
-}
-
-.signup-form-container h2 {
-  text-align: center;
-  margin-bottom: 24px;
-  font-size: 26px;
-  font-weight: 600;
-}
-
-/* Estilo de los campos */
-.form-field {
-  margin-bottom: 18px;
-}
-
-.form-field label {
-  font-size: 14px;
-  margin-bottom: 6px;
-  display: block;
+    font-size: 13px;
+    margin-bottom: 4px;
+    display: block;
+    color: white;
+    /* CAMBIADO: etiquetas en blanco */
 }
 
 .form-field input,
 .form-field select {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  background-color: white;
-  color: black;
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    background-color: white;
+    /* MANTENIDO: campos en blanco para contraste */
+    color: black;
+    /* MANTENIDO: texto negro en campos blancos */
+    box-sizing: border-box;
 }
 
-/* Botón */
+/* === CAMPO DE CONTRASEÑA CON TOGGLE === */
+.password-field {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.password-field input[type="password"],
+.password-field input[type="text"] {
+    width: 100% !important;
+    padding: 7px 45px 7px 7px !important;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    background-color: white;
+    color: black;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+}
+
+/* === BOTÓN TOGGLE DE CONTRASEÑA === */
+.signup-form-container .password-toggle {
+    position: absolute !important;
+    right: 12px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    padding: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #666 !important;
+    font-size: 16px !important;
+    transition: all 0.2s ease !important;
+    z-index: 999 !important;
+    border-radius: 50% !important;
+    width: 28px !important;
+    height: 28px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.signup-form-container .password-toggle:hover {
+    color: #333 !important;
+    background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.signup-form-container .password-toggle:focus {
+    outline: none !important;
+    color: #0066cc !important;
+    background-color: rgba(0, 102, 204, 0.1) !important;
+}
+
+/* === ICONOS DEL TOGGLE === */
+.signup-form-container .password-toggle .show-icon::before {
+    content: "👁️" !important;
+    font-size: 14px !important;
+    display: block !important;
+}
+
+.signup-form-container .password-toggle .hide-icon::before {
+    content: "🙈" !important;
+    font-size: 14px !important;
+    display: block !important;
+}
+
+.signup-form-container .password-toggle.simple .show-icon::before {
+    content: "👁" !important;
+    font-size: 16px !important;
+}
+
+.signup-form-container .password-toggle.simple .hide-icon::before {
+    content: "×" !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+}
+
+.signup-form-container .password-toggle span {
+    display: block !important;
+    line-height: 1 !important;
+}
+
+/* === BOTÓN PRINCIPAL === */
 .btn-primary {
-  width: 100%;
-  padding: 12px;
-  background-color: #1B8C7D;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s;
+    width: 100%;
+    padding: 10px;
+    background-color: #1B8C7D;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 14px;
+    transition: background-color 0.3s;
 }
 
 .btn-primary:hover {
-  background-color: #157568;
+    background-color: #1B8C7D;
 }
 
-/* Columna derecha - imagen y texto */
+/* === COLUMNA DERECHA === */
 .right-column {
-  width: 40%;
-  background: url('/static/img/fondo.png') center center/cover no-repeat;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    width: 40%;
+    background-color: transparent;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .right-column img {
-  width: 60%;
-  margin-bottom: 16px;
+    width: 100%;
+    max-width: 220px;
+    margin-bottom: 12px;
 }
 
-.right-column p {
-  font-size: 20px;
-  font-weight: bold;
-  color: black;
-}
-
-.right-column span {
-  color: #6f00ff;
-}
-.gradient-bg {
-  height: 100vh;
-  background: linear-gradient(135deg, #006466, #065a60, #144552);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-}
-
-.signup-card {
-  display: flex;
-  width: 600px;  /* MÁS PEQUEÑO */
-  background-color: #0d1b2a;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-}
-
-/* FORMULARIO */
-.signup-form-container {
-  width: 60%;  /* ajustado */
-  padding: 24px;
-  color: white;
-}
-
-.signup-form-container h2 {
-  text-align: center;
-  margin-bottom: 16px;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.form-field {
-  margin-bottom: 12px;
-}
-
-.form-field label {
-  font-size: 13px;
-  margin-bottom: 4px;
-  display: block;
-}
-
-.form-field input,
-.form-field select {
-  width: 100%;
-  padding: 7px;
-  border: none;
-  border-radius: 6px;
-  font-size: 13px;
-  background-color: white;
-  color: black;
-}
-
-.btn-primary {
-  width: 100%;
-  padding: 10px;
-  background-color: #1B8C7D;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 14px;
-  transition: background-color 0.3s;
-}
-
-.btn-primary:hover {
-  background-color: #157568;
-}
-
-/* SILUETA Y LOGO */
-.right-column {
-  width: 40%;
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.right-column img {
-  width: 70%;
-  margin-bottom: 10px;
-}
-
-.right-column p {
-  font-size: 16px;
-  font-weight: bold;
-  color: black;
-  text-align: center;
-}
-
-.right-column span {
-  color: #6f00ff;
-}
-.gradient-bg {
-  height: 100vh;
-  background: linear-gradient(135deg, #006466, #065a60, #144552);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
-}
-
-.signup-card {
-  display: flex;
-  width: 600px;  /* MÁS PEQUEÑO */
-  background-color: #0d1b2a;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-}
-
-/* FORMULARIO */
-.signup-form-container {
-  width: 60%;  /* ajustado */
-  padding: 24px;
-  color: white;
-}
-
-.signup-form-container h2 {
-  text-align: center;
-  margin-bottom: 16px;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.form-field {
-  margin-bottom: 12px;
-}
-
-.form-field label {
-  font-size: 13px;
-  margin-bottom: 4px;
-  display: block;
-}
-
-.form-field input,
-.form-field select {
-  width: 100%;
-  padding: 7px;
-  border: none;
-  border-radius: 6px;
-  font-size: 13px;
-  background-color: white;
-  color: black;
-}
-
-.btn-primary {
-  width: 100%;
-  padding: 10px;
-  background-color: #1B8C7D;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 14px;
-  transition: background-color 0.3s;
-}
-
-.btn-primary:hover {
-  background-color: #157568;
-}
-
-/* SILUETA Y LOGO */
-.right-column {
-  width: 40%;
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.right-column img {
-  width: 70%;
-  margin-bottom: 10px;
-}
-
-.right-column p {
-  font-size: 16px;
-  font-weight: bold;
-  color: black;
-  text-align: center;
+.right-column p  {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin: 0;
 }
 
 
 .right-column span {
-  color: #6f00ff;
+    color: #6f00ff;
 }
 
+/* === ESTILOS PARA MENSAJES DE ERROR === */
+.text-red-400 {
+    color: #f87171;
+    /* Color rojo más visible en fondo oscuro */
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+/* === LOGO === */
 .logo-img {
-  height: 60px; /* o el tamaño que quieras */
-   width: auto;  /* opcional para mantener la proporción */
+    height: 50px;
+    width: auto;
 }
+
+/* === ESTILOS PARA FONDO OSCURO === */
+.dark-background .password-toggle {
+    color: #ccc !important;
+}
+
+.dark-background .password-toggle:hover {
+    color: #fff !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* === OVERRIDE DEL FONDO DEL BODY PARA SIGNUP === */
+body:has(.gradient-bg) {
+    background: transparent !important;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .signup-card {
+        flex-direction: column;
+        width: 90%;
+        max-width: 400px;
+        margin: 10px;
+    }
+
+    .signup-form-container,
+    .right-column {
+        width: 100%;
+    }
+
+    .right-column {
+        padding: 20px;
+    }
+
+    .gradient-bg {
+        min-height: calc(100vh - 80px);
+        padding-top: 80px;
+    }
+}
+
+/* === ELIMINAR FONDOS INTERFERENTES === */
+html,
+body {
+    background-color: transparent !important;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+

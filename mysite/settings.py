@@ -119,12 +119,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'register.Usuario'
 
+# Para desarrollo - muestra emails en la consola
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-ec'
 
 TIME_ZONE = 'UTC'
 
@@ -136,11 +138,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = "static/"  # url de archivos estaticos
+STATIC_URL = "/static/"  # url de archivos estaticos
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)  # carpeta fisica de archivos estaticos
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")  # carpeta fisica de archivos de Imagenes
-MEDIA_URL = "/media/"  #
-LOGIN_URL = "/"
+MEDIA_URL = "/media/"  
+LOGIN_URL = "login"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -148,5 +151,5 @@ LOGIN_URL = "/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_REDIRECT_URL = 'home'      # Después de iniciar sesión
+LOGIN_REDIRECT_URL = 'index'      # Después de iniciar sesión
 LOGOUT_REDIRECT_URL = 'index'     # Después de cerrar sesión

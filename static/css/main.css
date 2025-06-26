@@ -1,12 +1,279 @@
-body{
-    background: #62e097;
+/* main.css - Versión corregida - SOLO para páginas principales */
+
+/* Reset y configuración base */
+* {
+    box-sizing: border-box;
 }
 
-.bg-black{
-    background: #63e0a1;
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
-.card-project:hover{
-    border: 1px solid #fff;
+/* SOLO aplicar estilos de fondo a páginas principales - NO a login/signup */
+body.main-page {
+    font-family: 'Poppins', sans-serif !important;
+    background: #037c7c !important;
+    color: white !important;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* Permitir que páginas de autenticación tengan su propio estilo */
+body.login-page,
+body.signup-page,
+body.password-reset-page {
+    font-family: 'Poppins', sans-serif !important;
+    /* NO forzar background aquí - lo manejan sus propios CSS */
+}
+
+/* Contenedores */
+.container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Navbar y elementos de navegación */
+.navbar {
+    background-color: #89D1CF !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1000;
+}
+
+.navbar-brand,
+.nav-link {
+    color: #037c7c !important;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #025959 !important;
+    background-color: rgba(3, 124, 124, 0.1);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Logo en navbar */
+.logo-img {
+    height: 50px;
+    width: auto;
+}
+
+/* Clases utilitarias personalizadas - SOLO para páginas principales */
+.main-page .bg-turquoise {
+    background-color: #037c7c !important;
+}
+
+.main-page .bg-turquoise-light {
+    background-color: rgba(3, 124, 124, 0.8) !important;
+}
+
+.bg-navbar-logo {
+    background-color: #89D1CF !important;
+}
+
+.main-page .bg-dark-custom {
+    background: rgba(13, 27, 42, 0.95) !important;
+}
+
+/* Sobrescribir clases de Bootstrap SOLO en páginas principales */
+.main-page .bg-black {
+    background: #037c7c !important;
+}
+
+.main-page .bg-primary {
+    background-color: #037c7c !important;
+}
+
+/* Tarjetas y elementos de proyecto */
+.main-page .card {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px);
+}
+
+.card-project {
+    transition: all 0.3s ease;
     cursor: pointer;
+}
+
+.card-project:hover {
+    border: 1px solid #fff !important;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Botones personalizados */
+.btn-primary {
+    background-color: #037c7c !important;
+    border-color: #037c7c !important;
+}
+
+.btn-primary:hover {
+    background-color: #025959 !important;
+    border-color: #025959 !important;
+}
+
+.btn-outline-primary {
+    color: #037c7c !important;
+    border-color: #037c7c !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #037c7c !important;
+    border-color: #037c7c !important;
+}
+
+/* Botón especial para navbar */
+.btn-navbar {
+    background-color: #037c7c !important;
+    color: white !important;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-navbar:hover {
+    background-color: #025959 !important;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Formularios - SOLO en páginas principales */
+.main-page .form-control {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: #333 !important;
+}
+
+.main-page .form-control:focus {
+    background-color: white !important;
+    border-color: #037c7c !important;
+    box-shadow: 0 0 0 0.2rem rgba(3, 124, 124, 0.25) !important;
+}
+
+.main-page .form-label {
+    color: white !important;
+    font-weight: 500;
+}
+
+/* Alertas */
+.alert {
+    border-radius: 8px;
+    border: none;
+}
+
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.9) !important;
+    color: white !important;
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.9) !important;
+    color: white !important;
+}
+
+.alert-info {
+    background-color: rgba(3, 124, 124, 0.9) !important;
+    color: white !important;
+}
+
+/* Textos - SOLO en páginas principales */
+.main-page .text-primary {
+    color: #037c7c !important;
+}
+
+.main-page .text-light {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.text-navbar {
+    color: #037c7c !important;
+}
+
+/* Enlaces - SOLO en páginas principales */
+.main-page a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+}
+
+.main-page a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* Enlaces en navbar */
+.navbar a {
+    color: #037c7c !important;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    color: #025959 !important;
+    text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .main-page .card {
+        margin-bottom: 1rem;
+    }
+
+    .navbar-nav {
+        background-color: rgba(137, 209, 207, 0.95);
+        border-radius: 8px;
+        padding: 10px;
+        margin-top: 10px;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fadeIn {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Utilidades adicionales */
+.shadow-custom {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.border-light-custom {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Navbar toggler personalizado para móvil */
+.navbar-toggler {
+    border-color: #037c7c !important;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0.25rem rgba(3, 124, 124, 0.25);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23037c7c' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }

@@ -1,89 +1,93 @@
 {% extends 'layout.html' %}
 {% load static %}
 {% block content %}
-<style>
-  body {
-    background-color: #037c7c;
-  }
-  .comunidad-container {
-    padding: 40px 20px;
-    text-align: center;
-    color: white;
-  }
-
-  .comunidad-container h2 {
-    font-size: 32px;
-    margin-bottom: 10px;
-    text-shadow: 1px 1px 2px black;
-  }
-
-  .comunidad-container p {
-    font-size: 18px;
-    margin-bottom: 40px;
-  }
-
-  .tarjetas-publicaciones {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 24px;
-  }
-
-  .tarjeta {
-    background-color: #033f66;
-    width: 200px;
-    height: 200px;
-    border-radius: 8px;
-    padding: 16px;
-    color: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-size: 14px;
-  }
-
-  .tarjeta .username {
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .tarjeta .icono {
-    font-size: 18px;
-  }
-
-  .tarjeta .comentario {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 12px;
-  }
-</style>
+<link rel="stylesheet" href="{% static 'css/comunidad.css' %}">
 
 <div class="comunidad-container">
-  <h2>Comunidad</h2>
-  <p>Conéctate con otros, comparte tus experiencias y<br>mantente motivado</p>
-
-  <div class="tarjetas-publicaciones">
-    <div class="tarjeta">
-      <div class="username"><span class="icono">👤</span>Username</div>
-      <p>Texto de publicación......</p>
-      <div class="comentario"><span class="icono">📝</span>Comentar......</div>
+    <div class="comunidad-header">
+        <h1> 🌐 Comunidad Fit</h1>
+        <p class="subtitle">Conéctate con otros, comparte tus experiencias y mantente motivado</p>
     </div>
 
-    <div class="tarjeta">
-      <div class="username"><span class="icono">👤</span>Username</div>
-      <p>Texto de publicación......</p>
-      <div class="comentario"><span class="icono">📝</span>Comentar......</div>
+    <!-- Formulario para crear posts (oculto inicialmente) -->
+    <div id="post-form-container" class="post-form-container" style="display: none;">
+        <form id="create-post-form" method="POST" action="{% url 'crear_post' %}">
+            {% csrf_token %}
+            {{ form.contenido }}
+            <div class="form-actions">
+                <button type="button" id="cancel-post-btn" class="btn btn-secondary">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Publicar</button>
+            </div>
+        </form>
     </div>
 
-    <div class="tarjeta">
-      <div class="username"><span class="icono">👤</span>Username</div>
-      <p>Texto de publicación......</p>
-      <div class="comentario"><span class="icono">📝</span>Comentar......</div>
+    <!-- Lista de posts -->
+    <div class="posts-grid">
+        {% for post in posts %}
+        <div class="post-card" data-post-id="{{ post.id }}">
+            <div class="post-header">
+                <div class="user-avatar">{{ post.usuario.username|first|upper }}</div>
+                <div class="user-info">
+                    <h3>{{ post.usuario.username }}</h3>
+                    <div class="post-time">{{ post.created_at|timesince }} ago</div>
+                </div>
+            </div>
+            
+            <div class="post-content">
+                <p>{{ post.contenido }}</p>
+            </div>
+            
+            <div class="post-stats">
+                <span class="likes-count">{{ post.post_likes.count }} likes</span>
+                <span class="comments-count">{{ post.comments_count }} comentarios</span>
+            </div>
+            
+            <div class="post-actions">
+                <button class="action-btn like-btn {% if post.id in user_likes %}liked{% endif %}" data-post-id="{{ post.id }}">
+                    <i class="fas fa-heart"></i> Like
+                </button>
+                <button class="action-btn comment-btn" data-post-id="{{ post.id }}">
+                    <i class="fas fa-comment"></i> Comentar
+                </button>
+                {% if post.usuario == request.user %}
+                <button class="action-btn delete-btn" data-post-id="{{ post.id }}">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+                {% endif %}
+            </div>
+            
+            <!-- Sección de comentarios (oculta inicialmente) -->
+            <div class="comments-section" style="display: none;" data-post-id="{{ post.id }}">
+                <div class="comments-list">
+                    <!-- Los comentarios se cargarán aquí dinámicamente -->
+                </div>
+                
+                <form class="add-comment-form" data-post-id="{{ post.id }}">
+                    {% csrf_token %}
+                    <div class="comment-input-container">
+                        {{ comment_form.contenido }}
+                        <button type="submit" class="btn-comment-submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty-state">
+            <h3>No hay publicaciones aún</h3>
+            <p>Sé el primero en compartir algo con la comunidad</p>
+        </div>
+        {% endfor %}
     </div>
-  </div>
+
+    <!-- Botón flotante para crear posts -->
+    <button id="create-post-btn" class="create-post-btn">
+        <i class="fas fa-plus"></i>
+    </button>
 </div>
+
+<!-- Scripts -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="{% static 'js/comunidad.js' %}"></script>
 {% endblock %}

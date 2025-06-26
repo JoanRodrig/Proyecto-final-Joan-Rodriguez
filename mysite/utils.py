@@ -1,27 +1,59 @@
-# utils.py
-import matplotlib.pyplot as plt
-import io
-import base64
-from aplication.core.models import EvaluacionFisica
+# utils.py (versión actualizada)
+from datetime import timedelta
+from django.utils import timezone
 
-def generar_grafico_progreso(usuario):
-    evaluaciones = EvaluacionFisica.objects.filter(usuario=usuario).order_by('fecha')
-    fechas = [e.fecha.strftime('%d/%m') for e in evaluaciones]
-    grasas = [e.porcentaje_grasa for e in evaluaciones]
 
-    plt.figure(figsize=(6, 3))
-    plt.plot(fechas, grasas, marker='o', color='green')
-    plt.title("Progreso de grasa corporal")
-    plt.xlabel("Fecha")
-    plt.ylabel("Grasa (%)")
-    plt.grid(True)
-    plt.tight_layout()
+def calcular_metricas_progreso(evaluaciones):
+    """
+    Calcula métricas de progreso basado en evaluaciones físicas
+    """
+    if not evaluaciones.exists():
+        return None
 
-    buffer = io.BytesIO()
-    plt.savefig(buffer, format='png')
-    buffer.seek(0)
-    imagen_base64 = base64.b64encode(buffer.getvalue()).decode()
-    buffer.close()
-    plt.close()
+    primera = evaluaciones.earliest("fecha")
+    ultima = evaluaciones.latest("fecha")
 
-    return f"data:image/png;base64,{imagen_base64}"
+    metricas = {
+        "total_evaluaciones": evaluaciones.count(),
+        "primera_fecha": primera.fecha,
+        "ultima_fecha": ultima.fecha,
+    }
+
+    if primera.peso_kg and ultima.peso_kg:
+        diferencia = ultima.peso_kg - primera.peso_kg
+        metricas.update(
+            {
+                "diferencia_peso": round(diferencia, 2),
+                "porcentaje_peso": (
+                    round((diferencia / primera.peso_kg) * 100, 2)
+                    if primera.peso_kg
+                    else 0
+                ),
+            }
+        )
+
+    if primera.porcentaje_grasa and ultima.porcentaje_grasa:
+        metricas["diferencia_grasa"] = round(
+            ultima.porcentaje_grasa - primera.porcentaje_grasa, 2
+        )
+
+    return metricas
+
+
+def filtrar_evaluaciones_por_rango_fechas(evaluaciones, dias=30):
+    """
+    Filtra evaluaciones dentro de un rango de días
+
+    Args:
+        evaluaciones: QuerySet de EvaluacionFisica
+        dias (int): Número de días a considerar (por defecto 30)
+
+    Returns:
+        QuerySet: Evaluaciones filtradas por el rango de fechas
+    """
+    try:
+        fecha_limite = timezone.now() - timedelta(days=dias)
+        return evaluaciones.filter(fecha__gte=fecha_limite)
+    except Exception as e:
+        logger.error(f"Error filtrando evaluaciones por fecha: {e}")
+        return evaluaciones.none()  # Retorna queryset vacío en caso de error

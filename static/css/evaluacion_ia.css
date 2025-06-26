@@ -1,0 +1,563 @@
+/* Estilos base */
+body {
+    background-color: #037c7c !important;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.evaluacion-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.evaluacion-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: white;
+    font-weight: 700;
+}
+
+.evaluacion-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Flujo de evaluación */
+.evaluation-flow {
+    position: relative;
+    min-height: 500px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.step {
+    display: none;
+    animation: fadeIn 0.5s ease;
+    flex: 1;
+}
+
+.step.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Opciones de carga */
+.upload-options {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.btn-option {
+    padding: 15px 25px;
+    border-radius: 8px;
+    border: none;
+    background-color: #165d59;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.btn-option:hover {
+    background-color: #1a6b66;
+    transform: translateY(-2px);
+}
+
+.btn-option:disabled {
+    background-color: #666;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-option i {
+    font-size: 1.2rem;
+}
+
+/* Previsualización de imagen - MEJORADO */
+.image-preview-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 30px;
+    transition: all 0.5s ease;
+}
+
+/* Modo cámara activa - contenedor horizontal */
+.image-preview-container.camera-active {
+    max-width: 600px;
+}
+
+.image-preview {
+    width: 100%;
+    height: 400px;
+    background-color: #000;
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+/* Modo cámara activa - preview horizontal */
+.image-preview.camera-active {
+    height: 300px;
+    border-style: solid;
+    border-color: #ff6b35;
+}
+
+.preview-placeholder {
+    text-align: center;
+    opacity: 0.7;
+    color: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.preview-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.preview-placeholder p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Video Feed - MEJORADO para formato horizontal */
+#videoFeed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #000;
+    border-radius: 8px;
+    display: none;
+}
+
+#videoFeed.active {
+    display: block;
+}
+
+/* Imagen de preview - MEJORADO */
+#previewImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #000;
+    border-radius: 8px;
+}
+
+/* Canvas oculto para captura */
+#captureCanvas {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+.btn-capture {
+    padding: 12px 25px;
+    border-radius: 8px;
+    border: none;
+    background-color: #ff6b35;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 15px auto 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.btn-capture:hover {
+    background-color: #ff7b4a;
+    transform: translateY(-2px);
+}
+
+/* Formulario */
+.form-container {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 25px;
+    max-width: 500px;
+    margin: 0 auto 30px;
+}
+
+.form-container h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: white;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 6px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    color: #333;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    outline: none;
+    background-color: white;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+/* Resultados */
+.results-container {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 25px;
+    max-width: 500px;
+    margin: 0 auto 30px;
+}
+
+.results-container h3 {
+    margin-top: 0;
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* Nuevos estilos para secciones de resultados */
+.result-section {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.result-section:last-child {
+    border-bottom: none;
+}
+
+.result-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.result-item {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.result-label {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.result-value {
+    font-weight: 600;
+    color: white;
+}
+
+/* Estilos específicos para los nuevos elementos de resultados */
+#resultGenero, 
+#resultAltura, 
+#resultPeso,
+#resultCuello,
+#resultAbdomen,
+#resultCadera,
+#resultGrasa,
+#resultClasificacion,
+#resultRecomendacion {
+    font-weight: 600;
+    color: white;
+}
+
+#resultRecomendacion {
+    font-size: 0.9em;
+    line-height: 1.4;
+    display: inline-block;
+    max-width: 60%;
+    text-align: right;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.btn-action {
+    flex: 1;
+    min-width: 120px;
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-action:first-child {
+    background-color: #165d59;
+    color: white;
+}
+
+.btn-action:nth-child(2) {
+    background-color: #2a2a2a;
+    color: white;
+}
+
+.btn-action:nth-child(3) {
+    background-color: #6f42c1;
+    color: white;
+}
+
+.btn-action:hover {
+    transform: translateY(-2px);
+}
+
+/* Navegación */
+.step-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    gap: 15px;
+}
+
+.btn-nav {
+    padding: 12px 25px;
+    border-radius: 8px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.btn-nav.hidden {
+    display: none !important;
+}
+
+.btn-nav:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-nav:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-calculate {
+    padding: 12px 25px;
+    border-radius: 8px;
+    border: none;
+    background-color: #ff6b35;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.btn-calculate:hover:not(:disabled) {
+    background-color: #ff7b4a;
+    transform: translateY(-2px);
+}
+
+.btn-calculate:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Estados de éxito */
+.btn-success {
+    background-color: #28a745 !important;
+    color: white !important;
+}
+
+.btn-success:hover {
+    background-color: #218838 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .evaluacion-container {
+        padding: 15px;
+    }
+    
+    .evaluacion-title {
+        font-size: 1.8rem;
+    }
+    
+    .evaluacion-subtitle {
+        font-size: 1rem;
+    }
+    
+    .upload-options {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-option,
+    .btn-action {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .step-navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-nav,
+    .btn-calculate {
+        width: 100%;
+        justify-content: center;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .image-preview {
+        height: 350px;
+    }
+    
+    .image-preview.camera-active {
+        height: 250px;
+    }
+    
+    .image-preview-container.camera-active {
+        max-width: 100%;
+    }
+    
+    .form-container {
+        padding: 20px;
+    }
+
+    /* Ajustes responsive para los nuevos elementos */
+    .result-item {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .result-value {
+        text-align: right;
+    }
+
+    #resultRecomendacion {
+        max-width: 100%;
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .evaluacion-title {
+        font-size: 1.6rem;
+    }
+    
+    .form-container,
+    .results-container {
+        margin: 0 10px 20px;
+        padding: 15px;
+    }
+    
+    .image-preview {
+        height: 300px;
+    }
+    
+    .image-preview.camera-active {
+        height: 200px;
+    }
+    
+    .image-preview-container {
+        max-width: 350px;
+    }
+    
+    .image-preview-container.camera-active {
+        max-width: 100%;
+    }
+}

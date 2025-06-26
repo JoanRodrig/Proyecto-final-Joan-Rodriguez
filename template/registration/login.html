@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" href="{% static 'css/most_ocul.css' %}">
+
+<div class="login-bg">
+  <div class="login-container">
+    <!-- Slogan encima del cuadro -->
+    <h2 class="slogan-outside">Mide tu grasa corporal al instante y mejora tu salud</h2>
+    
+    <div class="login-card">
+      <div class="login-left">
+        <form action="/login/" method="POST" class="login-form">
+          <h1>Iniciar Sesión</h1>
+          {% csrf_token %}
+          
+          <div class="form-field">
+            <label for="id_username">Username:</label>
+            {{ form.username }}
+          </div>
+
+          <div class="form-field">
+            <label for="id_password">Password:</label>
+            <div class="password-field">
+              {{ form.password }}
+              <button type="button" class="password-toggle" data-target="id_password">
+                <span class="show-icon"></span>
+              </button>
+            </div>
+          </div>
+
+          {% if error %}
+            <p class="error-msg">{{ error }}</p>
+          {% endif %}
+
+          <button type="submit" class="btn-iniciar">Iniciar Sesión</button>
+
+          <div class="login-links">
+            <a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
+            <a>ó</a>
+            <a href="/signup/" class="btn-secundario">Crear cuenta</a>
+          </div>
+        </form>
+      </div>
+      
+      <div class="login-right">
+        <img src="{% static 'img/silueta-body.png' %}" alt="Silueta">
+        <p>BodyScanner <span>AI</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/most_ocul.js' %}"></script>
+{% endblock %}

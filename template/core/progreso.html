@@ -1,0 +1,153 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/progreso.css' %}">
+
+<div class="progress-container">
+  <div class="progress-header">
+    <h1 class="progress-title">📈 Seguimiento de Progreso</h1>
+    <p class="progress-subtitle">Visualiza tus métricas a lo largo del tiempo</p>
+  </div>
+
+  <div class="progress-content">
+    <!-- Filtro de rango de fechas -->
+    <div class="filtro-rango">
+      <form method="get" class="filtro-form">
+        <label for="dias">Mostrar últimos:</label>
+        <select name="dias" id="dias" onchange="this.form.submit()">
+          <option value="30" {% if dias_filtro == '30' %}selected{% endif %}>30 días</option>
+          <option value="90" {% if dias_filtro == '90' %}selected{% endif %}>3 meses</option>
+          <option value="180" {% if dias_filtro == '180' %}selected{% endif %}>6 meses</option>
+          <option value="365" {% if dias_filtro == '365' %}selected{% endif %}>1 año</option>
+          <option value="0" {% if dias_filtro == '0' %}selected{% endif %}>Todo el historial</option>
+        </select>
+      </form>
+    </div>
+
+    {% if has_data %}
+    <!-- Datos del gráfico para JavaScript -->
+      <div id="grafico-data" data-fechas-pesos='{{ grafico_data.fechas_pesos|safe }}'
+        data-pesos='{{ grafico_data.pesos|safe }}' data-fechas-grasas='{{ grafico_data.fechas_grasas|safe }}'
+        data-grasas='{{ grafico_data.grasas|safe }}' style="display: none;">
+      </div>
+
+      <!-- Tarjetas de métricas -->
+      <div class="progress-cards">
+        <div class="progress-card">
+          <span class="card-icon">📅</span>
+          <h3 class="card-title">Historial</h3>
+          <p class="card-description">Desde {{ metricas.primera_fecha }}</p>
+          <div class="metric-item">
+            <span class="metric-label">Evaluaciones:</span>
+            <span class="metric-value">{{ metricas.total_evaluaciones }}</span>
+          </div>
+        </div>
+
+        {% if metricas.diferencia_peso %}
+        <div class="progress-card">
+          <span class="card-icon">⚖️</span>
+          <h3 class="card-title">Peso</h3>
+          <p class="card-description">Cambio desde la primera evaluación</p>
+          <div class="metric-item">
+            <span class="metric-label">Diferencia:</span>
+            <span class="metric-value {% if metricas.diferencia_peso > 0 %}positive{% else %}negative{% endif %}">
+              {{ metricas.diferencia_peso|floatformat:2 }} kg
+            </span>
+          </div>
+          {% if metricas.porcentaje_peso %}
+          <div class="metric-item">
+            <span class="metric-label">Porcentaje:</span>
+            <span class="metric-value {% if metricas.porcentaje_peso > 0 %}positive{% else %}negative{% endif %}">
+              {{ metricas.porcentaje_peso|floatformat:2 }}%
+            </span>
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        {% if metricas.diferencia_grasa %}
+        <div class="progress-card">
+          <span class="card-icon">📊</span>
+          <h3 class="card-title">Grasa Corporal</h3>
+          <p class="card-description">Cambio en % de grasa</p>
+          <div class="metric-item">
+            <span class="metric-label">Diferencia:</span>
+            <span class="metric-value {% if metricas.diferencia_grasa < 0 %}positive{% else %}negative{% endif %}">
+              {{ metricas.diferencia_grasa|floatformat:2 }}%
+            </span>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Gráficos -->
+      <div class="chart-container">
+        <div class="progress-chart">
+          <h2 class="chart-title">📊 Progreso de Peso (kg)</h2>
+          <canvas id="pesoChart" width="400" height="200"></canvas>
+        </div>
+
+        <div class="progress-chart">
+          <h2 class="chart-title">📊 Progreso del % Grasa </h2>
+          <canvas id="grasaChart" width="400" height="200"></canvas>
+        </div>
+      </div>
+
+      <!-- Timeline de evaluaciones -->
+      <div class="timeline">
+        <h2 class="chart-title">🕒 Historial de Evaluaciones</h2>
+
+        {% for evaluacion in evaluaciones %}
+        <div class="timeline-item">
+          <div>
+            <div class="timeline-date">{{ evaluacion.fecha|date:"d F, Y" }}</div>
+            <div class="timeline-content">
+              <div class="timeline-metrics">
+                {% if evaluacion.peso_kg %}
+                <span class="timeline-metric">
+                  <strong>Peso:</strong> {{ evaluacion.peso_kg }} kg
+                </span>
+                {% endif %}
+
+                {% if evaluacion.porcentaje_grasa %}
+                <span class="timeline-metric">
+                  <strong>Grasa:</strong> {{ evaluacion.porcentaje_grasa }}%
+                </span>
+                {% endif %}
+              </div>
+
+              {% if evaluacion.recomendacion_msj %}
+              <div class="timeline-recomendacion">
+                <strong>Recomendación:</strong> {{ evaluacion.recomendacion_msj }}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="no-data">
+        <div class="no-data-icon">📊</div>
+        <h3>Aún no tienes evaluaciones registradas</h3>
+        <p>Realiza tu primera evaluación para comenzar a visualizar tu progreso</p>
+        <a href="/evaluacion-ia" class="btn-primary">Realizar primera evaluación</a>
+      </div>
+    {% endif %}
+
+    <!-- Botones de acción -->
+    {% if has_data %}
+    <div class="action-buttons">
+      <a href="/evaluacion-ia" class="btn-primary">📷 Nueva Evaluación</a>
+      <a href="/reportes" class="btn-secondary">📈 Ver Reportes Detallados</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Incluir Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
+<script src="{% static 'js/progreso.js' %}"></script>
+{% endblock %}
